@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ship extends Model
 {
+    protected  $fillable = [
+        'name',
+        'registration_number',
+        'capacity_in_tonnes',
+        'type',
+        'status',
+    ];
     /** @use HasFactory<\Database\Factories\ShipFactory> */
     use HasFactory;
 }

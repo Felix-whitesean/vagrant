@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Clinet;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
-class ClinetController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ClinetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Clinet $clinet)
+    public function show(Client $client)
     {
         //
     }
@@ -42,7 +42,7 @@ class ClinetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Clinet $clinet)
+    public function edit(Client $client)
     {
         //
     }
@@ -50,7 +50,7 @@ class ClinetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Clinet $clinet)
+    public function update(Request $request, Client $client)
     {
         //
     }
@@ -58,7 +58,7 @@ class ClinetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Clinet $clinet)
+    public function destroy(Client $client)
     {
         //
     }

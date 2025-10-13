@@ -20,14 +20,14 @@ class ShipController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('ships.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
@@ -63,3 +63,4 @@ class ShipController extends Controller
         //
     }
 }
+
