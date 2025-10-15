@@ -6,8 +6,8 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Hind Vadodara', sans-serif;
+    --font-marmelad: 'Marmelad', sans-serif;
 }
 @layer components{
     .container{
@@ -27,5 +27,11 @@
     }
     .form-group-text input{
         @apply text-gray-800;
+    }
+    .nav button{
+        @apply border-l-2 hover:border-blue-400 hover:cursor-pointer text-left;
+    }
+    .section-title{
+        @apply font-semibold text-gray-800 font-marmelad;
     }
 }
