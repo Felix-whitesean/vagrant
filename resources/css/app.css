@@ -11,6 +11,21 @@
 }
 @layer components{
     .container{
-        @apply font-semibold text-gray-400;
+
+    }
+    .form{
+        @apply flex flex-col gap-4 border-2 border-gray-300 w-[50%] m-auto p-4 rounded-md;
+    }
+    .form h3{
+        @apply font-semibold text-[1.2rem] self-center;
+    }
+    .form-container{
+        @apply flex flex-col gap-2;
+    }
+    .form-group-text{
+        @apply flex flex-col text-gray-600;
+    }
+    .form-group-text input{
+        @apply text-gray-800;
     }
 }

@@ -12,7 +12,7 @@ class Ship extends Model
         'registration_number',
         'capacity_in_tonnes',
         'type',
-        'status',
+
     ];
     /** @use HasFactory<\Database\Factories\ShipFactory> */
     use HasFactory;

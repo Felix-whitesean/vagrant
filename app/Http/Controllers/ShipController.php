@@ -13,6 +13,7 @@ class ShipController extends Controller
     public function index()
     {
         //
+        return view('welcome');
     }
 
     /**
@@ -29,6 +30,17 @@ class ShipController extends Controller
      */
     public function store(Request $request){
         //
+        $data = $request->validate([
+            'name' => 'required|min:5|string',
+            'registration_number' => 'required|min:3|string|max:200',
+            'capacity_in_tonnes' => 'required|decimal:2',
+            'type' => 'required|string',
+            'status' => 'nullable|string',
+        ]);
+
+        Ship::create($data);
+
+        return redirect()->route('ships.index');
     }
 
     /**
