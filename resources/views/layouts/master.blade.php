@@ -18,7 +18,7 @@
     @endif
     @livewireStyles
 </head>
-<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex flex-col">
+<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex flex-col font-sans">
     @yield('content')
     @livewireScripts
 </body>

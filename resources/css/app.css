@@ -10,11 +10,8 @@
     --font-marmelad: 'Marmelad', sans-serif;
 }
 @layer components{
-    .container{
-
-    }
     .form{
-        @apply flex flex-col gap-4 border-2 border-gray-300 w-[50%] m-auto p-4 rounded-md;
+        @apply flex flex-col self-center gap-4 border-2 border-gray-300 w-[50%] lg:min-w-[500px] m-auto p-4 rounded-md;
     }
     .form h3{
         @apply font-semibold text-[1.2rem] self-center;
@@ -32,6 +29,6 @@
         @apply border-l-2 hover:border-blue-400 hover:cursor-pointer text-left;
     }
     .section-title{
-        @apply font-semibold text-gray-800 font-marmelad;
+        @apply font-semibold text-[0.9rem] text-gray-800 self-start;
     }
 }

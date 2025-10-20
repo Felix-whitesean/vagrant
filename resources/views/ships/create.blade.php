@@ -3,5 +3,4 @@
         <div class="container">
             @include('components.form')
         </div>
-
 @endsection

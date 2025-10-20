@@ -2,4 +2,3 @@
 @section('content')
     <livewire:menu/>
 @endsection
-

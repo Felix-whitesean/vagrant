@@ -4,7 +4,7 @@ namespace App\Livewire;
 use Livewire\Component;
 class Menu extends Component
 {
-    public string $active = "view-ships";
+    public string $active = "";
     public array $shipMenuItems = [
         ["label"=>"View ships","action"=>"view-ships"],
         ["label"=> "Add new ship","action"=>"add-new-ship"],
@@ -14,6 +14,11 @@ class Menu extends Component
         ["label"=>"View all employees","action"=>"view-employees"],
         ["label"=> "Assign ship to employee","action"=>"assign-ship-to-employee"],
     ];
+
+    public array $ports= [
+        ["label"=>"Ports","action"=>"view-ports"],
+    ];
+
     public function setActive($item)
     {
         $this->active = $item;
