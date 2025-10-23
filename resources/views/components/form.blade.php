@@ -1,65 +1,55 @@
-@php
-    $ship_types = ['cargo ship', 'passenger ship', 'military ship', 'icebreaker', 'fishing vessel', 'barge ship'];
-    $status = [ 'active', 'under maintenance', 'decommissioned'];
-@endphp
-
-
-<form method="POST" wire:submit.prevent="storeship">
+<form method="POST" action="{{route($actionRoute)}}">
     @csrf
     @method('post')
     <div class="form">
-        <h3>Add new ship</h3>
+        <h3>{{$title}}</h3>
         <div class="form-container">
-            <div class="form-group-text">
-                <label for="ship_name">Ship name:</label>
-                <input id="ship_name" class="form-control" type="text" name="name" value="{{old('name')}}" >
-                @error('name')
-                <div class="text-red-500">{{$message}}</div>
-                @enderror
-            </div>
+            @foreach($formFields as $field)
+                @if($field['type'] == "select")
+                    @php
+                        $optionsArrayName = $field['optionsArray'];
+                        $options = $$optionsArrayName ?? [];
+                    @endphp
+                    <div class="form-group-text">
+                        <label for="status">{{$field['label']}}</label>
+                        <select class="form-select" type="text" name="{{$field['name']}}" id="{{$field['name']}}">
+                            <option value="">--select--</option>
+                            @if(is_array($options) && count($options) > 0 && is_string(array_key_first($options)))
+                                @foreach($options as $value)
+                                    <option value="{{ $value }}">{{ ucfirst($value) }}</option>
+                                @endforeach
 
-            <div class="form-group-text">
-                <label for="registration_number">Registration number:</label>
-                <input id="registration_number" class="form-control" type="text" name="registration_number" value="{{old('registration_number')}}" >
-                @error('registration_number')
-                <div class="text-red-500">{{$message}}</div>
-                @enderror
-            </div>
+                                {{-- For id => name pairs --}}
+                            @elseif(is_array($options))
+                                @foreach($options as $id => $label)
+                                    <option value="{{ $id }}">{{ ucfirst($label) }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                           @error($field['name'])
+                                <div class="text-red-500">{{$message}}</div>
+                           @enderror
+                    </div>
 
-            <div class="form-group-text">
-                <label for="capacity">Capacity:</label>
-                <input id="capacity" class="form-control" type="number" name="capacity_in_tonnes" step="0.01" value="{{old('capacity_in_tonnes')}}" >
-                @error('capacity_in_tonnes')
-                <div class="text-red-500">{{$message}}</div>
-                @enderror
-            </div>
+                @elseif($field['type'] == "number")
+                    <div class="form-group-text">
+                        <label for="ship_name">{{$field['label']}}</label>
+                        <input id="{{$field['name']}}" class="form-control" type="{{$field['type']}}" name="{{$field['name']}}" step="{{$field['step']}}" value="{{old($field['name'])}}" >
+                        @error($field['name'])
+                        <div class="text-red-500">{{$message}}</div>
+                        @enderror
+                    </div>
 
-            <div class="form-group-text">
-                <label for="type">Type:</label>
-                <select class="form-select" type="text"  name="type" id="type" >
-                    <option value="">--select--</option>
-                    @foreach($ship_types as $type)
-                        <option value="{{$type}}">{{$type}}</option>
-                    @endforeach
-                </select>
-                @error('type')
-                <div class="text-red-500">{{$message}}</div>
-                @enderror
-            </div>
-
-            <div class="form-group-text">
-                <label for="status">Status:</label>
-                <select class="form-select" type="text" name="status" id="status">
-                    <option value="">--select--</option>
-                    @foreach($status as $value)
-                        <option value="{{$value}}">{{$value}}</option>
-                    @endforeach
-                </select>
-                @error('status')
-                <div class="text-red-500">{{$message}}</div>
-                @enderror
-            </div>
-
+                @else
+                    <div class="form-group-text">
+                        <label for="ship_name">{{$field['label']}}</label>
+                        <input id="{{$field['name']}}" class="form-control" type="{{$field['type']}}" name="{{$field['name']}}" value="{{old($field['name'])}}" >
+                        @error($field['name'])
+                        <div class="text-red-500">{{$message}}</div>
+                        @enderror
+                    </div>
+                @endif
+            @endforeach
             <button class="btn btn-primary" type="submit">Submit</button>
         </div>
     </div>

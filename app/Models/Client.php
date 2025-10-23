@@ -10,11 +10,9 @@ class Client extends Model
    protected $fillable = [
        'first_name',
        'last_name',
-       'email_address',
+       'email',
        'phone_number',
-       'status',
-        'arrival_estimate',
-       'is_active'
+       'address',
    ];
     /** @use HasFactory<\Database\Factories\ClinetFactory> */
     use HasFactory;

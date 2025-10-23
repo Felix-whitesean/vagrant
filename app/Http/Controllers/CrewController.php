@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Crew;
+use App\Models\Ship;
 use Illuminate\Http\Request;
 
 class CrewController extends Controller
@@ -21,6 +22,21 @@ class CrewController extends Controller
     public function create()
     {
         //
+        $actionRoute = "crew.store";
+        $title = "Add new crew member";
+        $formFields = [
+            ['name' => 'ship_id', 'label' => 'Ship', 'type' => 'select', 'optionsArray' => 'ships'],
+            ['name' => 'first_name', 'label' => 'First Name', 'type' => 'text'],
+            ['name' => 'last_name', 'label' => 'Last Name', 'type' => 'text'],
+            ['name' => 'role', 'label' => 'Role', 'type' => 'select', 'optionsArray' => 'crewRoles'],
+            ['name' => 'phone_number', 'label' => 'Phone Number', 'type' => 'tel'],
+            ['name' => 'nationality', 'label' => 'Nationality', 'type' => 'text'],
+        ];
+
+        $ships = Ship::pluck('name', 'id')->toArray();
+        $crewRoles = ['Captain', 'Chief Officer', 'Able Seaman', 'Ordinary Seaman', 'Engine Cadet', 'Radio Officer', 'Chief Cook', 'Steward', 'Deckhand'];
+
+        return view('crew.create', compact('actionRoute', 'formFields', 'ships', 'crewRoles', 'title'));
     }
 
     /**
@@ -29,6 +45,18 @@ class CrewController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'ship_id' => 'nullable|numeric',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'role' => 'required|string',
+            'phone_number' => 'required|string',
+            'nationality' => 'required|string',
+        ]);
+
+        Crew::create($data);
+
+        return redirect()->route('ships.index');
     }
 
     /**

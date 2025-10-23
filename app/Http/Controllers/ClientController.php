@@ -13,6 +13,7 @@ class ClientController extends Controller
     public function index()
     {
         //
+        return view('clients.index');
     }
 
     /**
@@ -21,6 +22,16 @@ class ClientController extends Controller
     public function create()
     {
         //
+        $actionRoute = 'clients.store';
+        $title = "Add new client";
+        $formFields = [
+            ['name' => 'first_name', 'label' => 'First Name', 'type' => 'text'],
+            ['name' => 'last_name', 'label' => 'Last Name', 'type' => 'text'],
+            ['name' => 'email_address', 'label' => 'Email', 'type' => 'email'],
+            ['name' => 'phone_number', 'label' => 'Phone Number', 'type' => 'tel'],
+            ['name' => 'address', 'label' => 'Address', 'type' => 'text'],
+        ];
+        return view('clients.create', compact(['actionRoute', 'formFields', 'title']));
     }
 
     /**
@@ -29,6 +40,17 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email_address' => 'nullable|email',
+            'phone_number' => 'nullable|string',
+            'address' => 'required',
+        ]);
+
+        Client::create($data);
+
+        return redirect()->route('ships.index');
     }
 
     /**

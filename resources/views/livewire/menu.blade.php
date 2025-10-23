@@ -14,13 +14,20 @@
                         <button wire:click="setActive('{{$item['action']}}')" class="px-3 {{ $active === $item['action'] ? 'border-gray-600 text-gray-600' :'border-transparent text-gray-400'}}">{{$item['label']}}</button>
                     @endforeach
 
-                    @foreach($ports as $item)
+                    @foreach($portsMenuItems as $item)
                         <button wire:click="setActive('{{$item['action']}}')" class="px-3 {{ $active === $item['action'] ? 'border-gray-600 text-gray-600' :'border-transparent text-gray-400'}}">{{$item['label']}}</button>
                     @endforeach
                 </div>
                 <div class="flex flex-col gap-2">
                     <div class="section-title">Crew management</div>
                     @foreach($crewMenuItems as $item)
+                        <button wire:click="setActive('{{$item['action']}}')" class="px-3 {{ $active === $item['action'] ? 'border-gray-600 text-gray-600' :'border-transparent text-gray-400'}}">{{$item['label']}}</button>
+                    @endforeach
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <div class="section-title">Clients</div>
+                    @foreach($clientMenuItems as $item)
                         <button wire:click="setActive('{{$item['action']}}')" class="px-3 {{ $active === $item['action'] ? 'border-gray-600 text-gray-600' :'border-transparent text-gray-400'}}">{{$item['label']}}</button>
                     @endforeach
                 </div>
@@ -37,13 +44,22 @@
                 @include('ships.index')
 
             @elseif($active === "view-ships")
-                @include('ships.view')
+                @include('ships.view', ['ships' => $ships])
 
-            @elseif($active == "add-new-ship")
-                @include('ships.create')
+            @elseif($active === "view-ports")
+                @include('ports.index', ['ports' => $ports])
 
-            @elseif($active == "view-ports")
-                @include('ports.index')
+            @elseif($active === "client-home")
+                @include('clients.index')
+
+            @elseif($active === "view-crew")
+                @include('crew.index')
+
+            @elseif($active === "view-cargo")
+                @include('cargo.index')
+
+            @elseif($active === "view-shipments")
+                @include('shipments.index')
 
             @endif
         </div>

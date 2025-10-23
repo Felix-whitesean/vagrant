@@ -21,8 +21,19 @@ class ShipController extends Controller
      */
     public function create()
     {
+        $actionRoute = "ships.store";
+        $title = "Add new ship";
+        $formFields = [
+            ['name' => 'name', 'label' => 'Ship name', 'type' => 'text'],
+            ['name' => 'registration_number', 'label' => 'Registration number', 'type' => 'text'],
+            ['name' => 'capacity_in_tonnes', 'label' => 'Capacity (in tonnes)', 'type' => 'number', 'step' => '0.01'],
+            ['name' => 'type', 'label' => 'Type', 'type' => 'select', 'optionsArray' => 'ship_types'],
+            ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'optionsArray' => 'status'],
+        ];
+        $ship_types = ['cargo ship', 'passenger ship', 'military ship', 'icebreaker', 'fishing vessel', 'barge ship'];
+        $status = [ 'active', 'under maintenance', 'decommissioned'];
 
-        return view('ships.create');
+        return view('ships.create', compact(['formFields', 'actionRoute', 'ship_types', 'status', 'title']));
     }
 
     /**
@@ -30,6 +41,7 @@ class ShipController extends Controller
      */
     public function store(Request $request){
         //
+
         $data = $request->validate([
             'name' => 'required|min:5|string',
             'registration_number' => 'required|min:3|string|max:200',
